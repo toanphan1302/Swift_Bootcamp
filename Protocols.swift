@@ -77,3 +77,23 @@ print("Test multiply: ")
 (myComplex * anotherComplex).describe()
 print("Test devide: ")
 (myComplex / anotherComplex).describe()
+
+// Using Extension with Hasable
+
+extension ImaginaryNumber: Hashable {
+    func hash(into hasher: inout Hasher){
+        hasher.combine(real)
+        hasher.combine(img)
+    }
+}
+
+var complexSet: Set = [ImaginaryNumber(real: 2, img: 3),ImaginaryNumber(real: 4, img: 5)]
+let randomComplex = ImaginaryNumber(real: 1, img: 7)
+if complexSet.contains(randomComplex){
+    print("Already have ")
+    randomComplex.describe()
+} else{
+    complexSet.insert(randomComplex)
+    print("New complex added to set:")
+    randomComplex.describe()
+}
